@@ -1,0 +1,34 @@
+\begin{thebibliography}{1}
+
+\bibitem{UdacityLesson9}
+Udacity, ``Lesson 9: Introduction to localization,'' August 2018.
+
+\bibitem{ROSWiki}
+``Ros wiki.'' \url{http://wiki.ros.org/}.
+\newblock Accessed: 2018-08-28.
+
+\bibitem{ROSAMCL}
+``Ros amcl package.'' \url{http://wiki.ros.org/amcl}.
+\newblock Accessed: 2018-08-20.
+
+\bibitem{ROSMoveBase}
+``Ros move-base package.'' \url{http://wiki.ros.org/move_base}.
+\newblock Accessed: 2018-08-20.
+
+\bibitem{kalmanwiki}
+``Kalman filter wiki.'' \url{https://en.wikipedia.org/wiki/Kalman_filter}.
+\newblock Accessed: 2018-08-28.
+
+\bibitem{UdacityLesson10}
+Udacity, ``Lesson 10: Kalman filters,'' August 2018.
+
+\bibitem{PEEL2018244}
+H.~Peel, S.~Luo, A.~Cohn, and R.~Fuentes, ``Localisation of a mobile robot for
+  bridge bearing inspection,'' {\em Automation in Construction}, vol.~94,
+  pp.~244 -- 256, 2018.
+
+\bibitem{phobos}
+``Phobos github.'' \url{https://github.com/dfki-ric/phobos}.
+\newblock Accessed: 2018-09-02.
+
+\end{thebibliography}

@@ -1,0 +1,63 @@
+position tracking:
+global localization: initial pose is unknown. Determine its pose relative to the ground truth map
+kidnapped robot problem: global localization, expect the robot is kidnapped and relocated at any given time.
+
+
+expected uncertainty of a sensor or a movement
+sensor fusion
+
+KALMAN FILTER
+-------------
+
+
+    The Kalman Filter cannot be used when the measurement and/or state transition functions are nonlinear, since this would result in a non-Gaussian distribution.
+
+    Instead, we take a local linear approximation and use this approximation to update the covariance of the estimate. The linear approximation is made using the first terms of the Taylor Series, which includes the first derivative of the function.
+
+    In the multi-dimensional case, taking the first derivative isn't as easy as there are multiple state variables and multiple dimensions. Here we employ a Jacobian, which is a matrix of partial derivatives, containing the partial derivative of each dimension with respect to each state variable.
+
+
+MONTE CARLO
+----------
+
+The powerful Monte Carlo localization algorithm estimates the posterior distribution of a robot’s position and orientation based on sensory information.
+
+recursive bayes filter
+
+In mobile robot localization, it’s important to be acquainted with the following definitions:
+
+    Dynamical system: The mobile robot and its environment
+    State: The robot’s pose, including its position and orientation.
+    Measurements: Perception data(e.g. laser scanners) and odometry data(e.g. rotary encoders)
+
+
+
+However a much more interesting problem would be to adapt the current configuration for outdoor environments
+
+
+#results
+#-----------
+
+A localization software using the Robot Operating System (ROS) utilizing the Adaptive Monte Carlo Localization (AMCL) algorithm.
+
+
+inflation radius of 1.5, 1.0 were too high robot was getting stuck in the nallow hallway. Lowered to 0.5
+
+obstacle range and raytrace range were experimented with in order to give proper range without running into walls or getting stuck, while also giving the best performance with the local machine this program was tested on. An obstacle_range, and raytrace_range lower than 6 and 8 respectively caused the robot to zigzag back and forth down the hallway without proper awareness of the wall around surrounding it.
+
+A base template for the amcl.yaml file was taken from the ros-p2os driver package (https://github.com/dawonn/ros-p2os/blob/master/p2os_launch/config/amcl/amcl.yaml)
+
+
+
+without local planner parameters robot had hard time navigating down the hallway zigzagging back and forth down the hall, getting stuck against walls and having to reverse out of them. During testing the local planner was throwing collision errors when the robot was getting too close to walls.  However eventually made it to its destination. Control loop kept missing its 20Hz desired rate
+
+
+adding amcl filter parameters, laser model parameters, and odometery model parameters provided drastic increases to the performance of the localization node, and the local planner node. Decreasing the amount of particles available for monte carlo localization aided in performance, and helped decrease the covariance, or uncertainty of the posterior belief. The KLD sampling were shown to be tuned appropriately where after a certain amout of timesets number of mone carlo particles was minimized, and were seen to be tightly centered around the robots actual pose.
+
+Upon reaching the navigation goal it was observed that the robot has difficulty assuming the correct orientation of the goal pose, rotating around a few times, with the covariance matrix of the AMCL fitler increasing in uncertainty until the navigation stack corrects the robots behaviour and it assumes the correct orientation.
+
+#Tank-bot
+#---------
+A configuration file for differential drive controller was added in order to drive multiple wheels on each side of the robot. Independent control of each wheel seems like it can be done with the skid steer controller, however that was not investigated in this report.
+
+Using teleop controls wheel heights were varied until a smooth control of the robot was achieved. 
